@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<table>
+	<tr>
+		<input type="text" name="showNumber" value="0" readonly>
+	</tr>
+	<tr>
+		<td><button onclick="setShowNumber(9)">9</button></td>
+		<td><button onclick="setShowNumber(8)">8</button></td>
+		<td><button onclick="setShowNumber(7)">7</button></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><button onclick="setShowNumber(6)">6</button></td>
+		<td><button onclick="setShowNumber(5)">5</button></td>
+		<td><button onclick="setShowNumber(4)">4</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="setShowNumber(3)">3</button></td>
+		<td><button onclick="setShowNumber(2)">2</button></td>
+		<td><button onclick="setShowNumber(1)">1</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="setShowNumber(0)">0</button></td>
+		<td><button onclick="setShowNumber('.')">.</button></td>
+		<td><button onclick="calculate()">=</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="setOperator('+')">+</button></td>
+		<td><button onclick="setOperator('-')">-</button></td>
+		<td><button onclick="setOperator('x')">x</button></td>
+	</tr>
+	<tr>
+		<td><button onclick="setOperator('/')">/</button></td>
+		<td><button onclick="clearEverything()">C</button></td>
+	</tr>
+</table>
+
+
+<script>
+	var firstNumber;
+	var secondNumber;
+	var answerNumber;
+	var operator;
+	
+	function setShowNumber(number){
+		var numberBeforeChange=document.getElementsByName("showNumber")[0].value;
+		var numberAfterChange;
+		if(numberBeforeChange!="0"){
+			numberAfterChange=numberBeforeChange+number;
+			}
+		else {
+			numberAfterChange=number;
+		}
+		document.getElementsByName("showNumber")[0].value=numberAfterChange;
+	}
+	
+	function setOperator(op){
+		operator=op;
+		firstNumber=document.getElementsByName("showNumber")[0].value;
+		document.getElementsByName("showNumber")[0].value="";
+	}
+	
+	function calculate(){
+		secondNumber=document.getElementsByName("showNumber")[0].value;
+		if(secondNumber!="0"){
+			switch(operator)
+			{
+				case "+": answerNumber=Number(firstNumber)+ Number(secondNumber);break;
+				case "-": answerNumber=Number(firstNumber)- Number(secondNumber);break;
+				case "x": answerNumber=Number(firstNumber)*Number(secondNumber);break;
+				case "/": answerNumber=Number(firstNumber)/Number(secondNumber);break;
+			}
+			document.getElementsByName("showNumber")[0].value=answerNumber;
+		}else{
+			document.getElementsByName("showNumber")[0].value="Wrong!!!";
+			alert("Divided by zero is forbidden!")
+		}
+	}
+	
+	function clearEverything(){
+		firstNumber="";
+		secondNumber="";
+		operator="";
+		document.getElementsByName("showNumber")[0].value="0";
+	}
+</script>
+</html>
